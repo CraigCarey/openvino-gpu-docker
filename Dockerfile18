@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ARG DOWNLOAD_LINK=http://registrationcenter-download.intel.com/akdlm/irc_nas/15693/l_openvino_toolkit_p_2019.2.242.tgz
 ARG INSTALL_DIR=/opt/intel/openvino
@@ -39,6 +39,7 @@ RUN cd ~ && \
 RUN echo "source /opt/intel/openvino/bin/setupvars.sh" >> ~/.bashrc
 
 RUN cd /opt/intel/openvino/install_dependencies/; \
+    sed -i 's/16.04/18.04/g' install_NEO_OCL_driver.sh; \
     ./install_NEO_OCL_driver.sh
 
 RUN usermod -aG video root
