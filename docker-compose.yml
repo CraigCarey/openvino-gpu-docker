@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  gdbserver:
+    build: .
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    container_name: remote_debug
+    ports:
+      - "7776:22"     # ssh
+      - "7777:7777"   # gdb
+    entrypoint: "/usr/sbin/sshd -D"
+    devices:
+      - "/dev/dri"
